@@ -50,7 +50,7 @@ let removeFromPossible (grid:Grid) r c v =
         if newSet.Count = 0 then
             raise SolutionNotFound
         grid.[r,c] <- Possible newSet
-    | Known -> ()
+    | Known _ -> ()
 
 let setKnown (grid:Grid) r c v =
     // Set known cell
