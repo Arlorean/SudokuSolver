@@ -22,15 +22,15 @@ The Miracle Sudoku is defined as normal Sudoku rules plus any two cells separate
 
 Here is the board starting state with just two known values:
 
-| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-|---|---|---|---|---|---|---|---|---|
-| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-| &nbsp; | 1 | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | 2 | &nbsp; | &nbsp; |
-| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+<table>
+  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
+  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
+  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
+  <tr><td>&ensp;<td> &ensp; <td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
+  <tr><td>&ensp;<td>&ensp;<td>   1  <td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
+  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>   2  <td>&ensp;<td>&ensp;
+  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
+  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
+  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
+</table>
 
