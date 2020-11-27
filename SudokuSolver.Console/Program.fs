@@ -75,6 +75,11 @@ let makeSudokuMove (grid:Grid) r c v =
         for c' in c'..c'+2 do
             removeFromPossible grid r' c' v        
 
+let knightMoves = [|(-2,-1);(-1,-2);(+2,-1);(+1,-2);
+                    (+2,+1);(+1,+2);(-2,+1);(-1,+2) |]
+
+let orthogonallyAdajcent = [|(0,1);(0,-1);(1,0);(-1,0)|]
+
 let makeMiracleSudokuMove (grid:Grid) r c v =
     makeSudokuMove grid r c v
 
@@ -84,13 +89,10 @@ let makeMiracleSudokuMove (grid:Grid) r c v =
             removeFromPossible grid r' c' v    
 
     // Remove Knights moves
-    let knightMoves = [|(-2,-1);(-1,-2);(+2,-1);(+1,-2);
-                        (+2,+1);(+1,+2);(-2,+1);(-1,+2) |]
     for (dr, dc) in knightMoves do
         removeFromPossible grid (r+dr) (c+dc) v    
    
     // Remove orthogonally adjacent consecutive digits
-    let orthogonallyAdajcent = [|(0,1);(0,-1);(1,0);(-1,0)|]
     for (dr, dc) in orthogonallyAdajcent do
         removeFromPossible grid (r+dr) (c+dc) (v+1)    
         removeFromPossible grid (r+dr) (c+dc) (v-1)    
