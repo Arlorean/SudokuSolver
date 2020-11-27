@@ -1,6 +1,6 @@
 ﻿// Simple Sudoku Solver
 // Adam Davidson
-// 11th August 2020
+// 27th November 2020
 
 open System.Diagnostics
 
@@ -43,16 +43,20 @@ exception SolutionFound of Grid
 exception SolutionNotFound
 
 let removeFromPossible (grid:Grid) r c v =
-    let cell = grid.[r,c]
-    match cell with
-    | Possible possible -> 
-        let newSet = Set.remove v possible
-        if newSet.Count = 0 then
-            raise SolutionNotFound
-        grid.[r,c] <- Possible newSet
-    | Known _ -> ()
+    // Ignore cells outside of the grid
+    if r < 0 || c < 0 || r > 8 || c > 8
+    then ()
+    else
+        let cell = grid.[r,c]
+        match cell with
+        | Possible possible -> 
+            let newSet = Set.remove v possible
+            if newSet.Count = 0 then
+                raise SolutionNotFound
+            grid.[r,c] <- Possible newSet
+        | Known _ -> ()
 
-let setKnown (grid:Grid) r c v =
+let makeSudokuMove (grid:Grid) r c v =
     // Set known cell
     Array2D.set grid r c (Known v)
 
@@ -71,7 +75,27 @@ let setKnown (grid:Grid) r c v =
         for c' in c'..c'+2 do
             removeFromPossible grid r' c' v        
 
-let rec solveGrid (grid:Grid) =
+let makeMiracleSudokuMove (grid:Grid) r c v =
+    makeSudokuMove grid r c v
+
+    // Remove Kings moves
+    for r' in r-1..r+1 do
+        for c' in c-1..c+1 do
+            removeFromPossible grid r' c' v    
+
+    // Remove Knights moves
+    let knightMoves = [|(-2,-1);(-1,-2);(+2,-1);(+1,-2);
+                        (+2,+1);(+1,+2);(-2,+1);(-1,+2) |]
+    for (dr, dc) in knightMoves do
+        removeFromPossible grid (r+dr) (c+dc) v    
+   
+    // Remove orthogonally adjacent consecutive digits
+    let orthogonallyAdajcent = [|(0,1);(0,-1);(1,0);(-1,0)|]
+    for (dr, dc) in orthogonallyAdajcent do
+        removeFromPossible grid (r+dr) (c+dc) (v+1)    
+        removeFromPossible grid (r+dr) (c+dc) (v-1)    
+
+let rec solveGrid (grid:Grid) makeMove =
     for r=0 to 8 do
         for c=0 to 8 do
             match grid.[r,c] with
@@ -79,8 +103,8 @@ let rec solveGrid (grid:Grid) =
                 for v in possible do
                     let copy = Array2D.copy grid
                     try 
-                        setKnown copy r c v
-                        solveGrid copy
+                        makeMove copy r c v
+                        solveGrid copy makeMove
                     with
                     | SolutionNotFound -> ()
                 raise SolutionNotFound
@@ -89,13 +113,13 @@ let rec solveGrid (grid:Grid) =
 
 /// Parsing text grids
     
-let initGrid (cells:int option[]) =
+let initGrid (cells:int option[]) makeMove =
     let grid = createEmptyGrid 9
     for r=0 to 8 do
         for c=0 to 8 do
             match cells.[r*9+c] with
             | Some v -> 
-                setKnown grid r c v
+                makeMove grid r c v
             | None -> ()   
     grid
         
@@ -154,16 +178,29 @@ let problem4 = "\
     .........\
     ........."
 
+// Miracle Sudoku Problem by Mitchell Lee
+// https://www.youtube.com/watch?v=yKf9aUIxdb4
+let problem5 = "\
+    .........\
+    .........\
+    .........\
+    .........\
+    ..1......\
+    ......2..\
+    .........\
+    .........\
+    ........."
+
 /// Execute tests
 
-let solveProblem problemText =
-    let problem = parseGrid problemText 
+let solveProblem problemText makeMove =
+    let problem = parseGrid problemText makeMove
 
     let timer = new Stopwatch()
     timer.Start()
 
     try
-        solveGrid problem
+        solveGrid problem makeMove
     with
     | SolutionFound solution ->
         printf "Grid is solved:\n"
@@ -177,9 +214,10 @@ let solveProblem problemText =
 
 [<EntryPoint>]
 let main argv =
-    solveProblem problem1
-    solveProblem problem2
-    solveProblem problem3
-    solveProblem problem4
+    solveProblem problem1 makeSudokuMove
+    solveProblem problem2 makeSudokuMove
+    solveProblem problem3 makeSudokuMove
+    solveProblem problem4 makeSudokuMove
+    solveProblem problem5 makeMiracleSudokuMove
     
     0 // return an integer exit code
