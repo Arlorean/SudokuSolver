@@ -17,20 +17,5 @@ To attempt to solve a problem, an initial board state and a `makeMove` function 
 ## Miracle Sudoku
 
 `makeMiracleSudoku` move is used for the [Miracle Sudoku](https://www.youtube.com/watch?v=yKf9aUIxdb4) problem by [Mitchell Lee](https://www.theguardian.com/science/2020/may/18/can-you-solve-it-sudoku-as-spectator-sport-is-unlikely-lockdown-hit).
-
-The Miracle Sudoku is defined as normal Sudoku rules plus any two cells separated by a knight's move or a king's move (in chess) cannot contain the same digit. Also, any two othogonally adjacent cells cannot contain consecutive digits.
-
-Here is the board starting state with just two known values:
-
-<table>
-  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
-  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
-  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
-  <tr><td>&ensp;<td> &ensp; <td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
-  <tr><td>&ensp;<td>&ensp;<td>   1  <td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
-  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>   2  <td>&ensp;<td>&ensp;
-  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
-  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
-  <tr><td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;<td>&ensp;
-</table>
-
+ 
+![](docs/MiracleSudoku.png)
