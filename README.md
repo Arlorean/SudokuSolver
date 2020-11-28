@@ -23,14 +23,17 @@ To attempt to solve a problem, an initial board state and a `makeMove` function 
 ## Performance
 
 This table shows the performance results running the tests a single time in Release on my [Huaweii Matebook X Pro](https://www.amazon.co.uk/gp/product/B07KCJGGW3).
+For all tests the smaller time is better (faster).
+This compares `solveGrid` which visits cells from top left to bottom right
+vs `solveGrid2` which orders the solver by the fewest number of remaining possibilities in each cell.
 
-| Test | Time (smaller is better) | Notes |
+| Test | solveGrid Time | solveGrid2 Time | Notes |
 |---|----------|-------|
-| 1 | 0.091504s | |
-| 2 | 0.033452s | |
-| 3 | 0.065200s | |
-| 4 | 0.040063s | Empty Sudoku |
-| 5 | 15.329430s | Miracle Sudoku |
+| 1 | 0.091504s | 0.073380s |
+| 2 | 0.033452s | 0.026237s |
+| 3 | 0.065200s | 0.061731s |
+| 4 | 0.040063s | 0.036557 | Empty Sudoku |
+| 5 | 15.329430s | 0.119469s | Miracle Sudoku |
 
 
 

@@ -97,6 +97,35 @@ let makeMiracleSudokuMove (grid:Grid) r c v =
         removeFromPossible grid (r+dr) (c+dc) (v+1)    
         removeFromPossible grid (r+dr) (c+dc) (v-1)    
 
+
+let possibleCells (grid:Grid) =
+    seq {
+        for r=0 to 8 do
+            for c=0 to 8 do
+                match grid.[r,c] with
+                | Possible possible ->
+                    yield (r,c,possible)
+                | Known known -> 
+                    ()
+    }
+
+let numPossibilities (r,c,possible) =
+    Set.count possible
+
+/// Solve grid by looking at the fewest number of possibilities first
+let rec solveGrid2 (grid:Grid) makeMove =
+    for (r,c,possible) in possibleCells grid |> Seq.sortBy numPossibilities do
+        for v in possible do
+            let copy = Array2D.copy grid
+            try 
+                makeMove copy r c v
+                solveGrid2 copy makeMove
+            with
+            | SolutionNotFound -> ()
+        raise SolutionNotFound
+    raise (SolutionFound grid)
+
+/// Solve grid from top left to botton right
 let rec solveGrid (grid:Grid) makeMove =
     for r=0 to 8 do
         for c=0 to 8 do
@@ -202,7 +231,7 @@ let solveProblem problemText makeMove =
     timer.Start()
 
     try
-        solveGrid problem makeMove
+        solveGrid2 problem makeMove
     with
     | SolutionFound solution ->
         printf "Grid is solved:\n"
@@ -221,5 +250,4 @@ let main argv =
     solveProblem problem3 makeSudokuMove
     solveProblem problem4 makeSudokuMove
     solveProblem problem5 makeMiracleSudokuMove
-    
     0 // return an integer exit code
