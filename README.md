@@ -20,6 +20,8 @@ To attempt to solve a problem, an initial board state and a `makeMove` function 
  
 ![](docs/MiracleSudoku.png)
 
+![](https://gameboardservice.azurewebsites.net/sudoku/.1234.svg)
+
 ## Performance
 
 This table shows the performance results running the tests a single time in Release on my [Huaweii Matebook X Pro](https://www.amazon.co.uk/gp/product/B07KCJGGW3).
